@@ -6,22 +6,15 @@ import { ContactList } from './ContactList/ContactList';
 import { useSelector, useDispatch } from 'react-redux';
 //import { setContactList } from '../redux/store';
 
-import { fetchContacts } from '../redux/contacts/contactsActions';
+import { fetchContacts } from '../redux/contacts/contactsOperations';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector(state => state.phonebook);
+  const { isLoading, error } = useSelector(state => state.contacts);
 
-  //componentDidMount();
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
-  //componentDidUpdate(prevProps, prevState, snapshot);
-  useEffect(() => {
-    //localStorage.save('phoneBook', items);
-    console.log(Array.isArray(items));
-  }, [items]);
 
   return (
     <div

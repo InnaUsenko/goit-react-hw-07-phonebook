@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts } from './contactsActions';
-import { setFilter } from './filterActions';
+import {
+  fetchContacts,
+  addContact,
+  deleteContacts,
+} from './contactsOperations';
 
 const contactsSlice = createSlice({
-  name: 'phonebook',
+  name: 'contacts',
   initialState: {
     items: [],
     isLoading: false,
     error: null,
-    filter: '',
   },
   extraReducers: builder => {
     builder
@@ -24,8 +26,32 @@ const contactsSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(setFilter, (state, action) => {
-        state.filter = action.payload;
+      .addCase(addContact.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = [...state.items, action.payload];
+      })
+      .addCase(addContact.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteContacts.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(deleteContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.items.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.items.splice(index, 1);
+      })
+      .addCase(deleteContacts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });

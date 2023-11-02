@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import css from './ContactForm.module.css';
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contacts/contactsActions';
+import { addContact } from '../../redux/contacts/contactsOperations';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contactsRedux = useSelector(state => state.phonebook.items);
+  const contactsRedux = useSelector(state => state.contacts.items);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -44,7 +44,6 @@ export const ContactForm = () => {
       name: contact.name,
       number: contact.number,
     };
-    console.log(newContact);
     dispatch(addContact(newContact));
   };
 
