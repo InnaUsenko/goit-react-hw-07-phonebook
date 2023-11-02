@@ -3,26 +3,25 @@ import React, { useEffect } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactFilter } from './ContactFilter/ContactFilter';
 import { ContactList } from './ContactList/ContactList';
-import localStorage from '../services/storage';
 import { useSelector, useDispatch } from 'react-redux';
-import { setContactList } from '../redux/store';
+//import { setContactList } from '../redux/store';
+
+import { fetchContacts } from '../redux/contacts/contactsActions';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const contactsRedux = useSelector(state => state.contacts);
+  const { items, isLoading, error } = useSelector(state => state.phonebook);
+  console.log('ITEMS: ' + items.length);
 
   //componentDidMount();
   useEffect(() => {
-    const localContacts = localStorage.load('phoneBook');
-    if (localContacts && localContacts.length > 0) {
-      dispatch(setContactList(localContacts));
-    }
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   //componentDidUpdate(prevProps, prevState, snapshot);
-  useEffect(() => {
-    localStorage.save('phoneBook', contactsRedux);
-  }, [contactsRedux]);
+  // useEffect(() => {
+  //   localStorage.save('phoneBook', items);
+  // }, [items]);
 
   return (
     <div
