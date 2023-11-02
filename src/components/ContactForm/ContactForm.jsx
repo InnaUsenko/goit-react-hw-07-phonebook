@@ -45,6 +45,7 @@ export const ContactForm = () => {
       number: contact.number,
     };
     console.log(newContact);
+    console.log(dispatch);
     //dispatch(addContact(newContact));
   };
 

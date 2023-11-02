@@ -18,9 +18,10 @@ export const App = () => {
   }, [dispatch]);
 
   //componentDidUpdate(prevProps, prevState, snapshot);
-  // useEffect(() => {
-  //   localStorage.save('phoneBook', items);
-  // }, [items]);
+  useEffect(() => {
+    //localStorage.save('phoneBook', items);
+    console.log(Array.isArray(items));
+  }, [items]);
 
   return (
     <div
