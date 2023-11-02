@@ -11,7 +11,6 @@ import { fetchContacts } from '../redux/contacts/contactsActions';
 export const App = () => {
   const dispatch = useDispatch();
   const { items, isLoading, error } = useSelector(state => state.phonebook);
-  console.log('ITEMS: ' + items.length);
 
   //componentDidMount();
   useEffect(() => {
@@ -33,6 +32,8 @@ export const App = () => {
       <h1>Phonebook</h1>
       <ContactForm />
       <h2>Contacts</h2>
+      {isLoading && <b>Loading tasks...</b>}
+      {error && <b>{error}</b>}
       <ContactFilter />
       <ContactList />
     </div>

@@ -1,6 +1,6 @@
 import css from './ContactFilter.module.css';
-import { useDispatch } from 'react-redux';
-//import { addFilter } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from '../../redux/contacts/filterActions';
 
 export const ContactFilter = () => {
   const dispatch = useDispatch();
@@ -14,9 +14,9 @@ export const ContactFilter = () => {
         className={css.inp}
         type="text"
         name="filter"
-        // onChange={event => {
-        //   dispatch(addFilter(event.target.value.toLowerCase()));
-        //}}
+        onChange={event => {
+          dispatch(setFilter(event.target.value.toLowerCase()));
+        }}
         required
       />
     </div>

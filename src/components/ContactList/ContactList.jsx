@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 export const ContactList = () => {
   //const dispatch = useDispatch();
   const contactsRedux = useSelector(state => state.phonebook.items);
-  const filterRedux = ''; //useSelector(state => state.filter);
+  const filterRedux = useSelector(state => state.phonebook.filter);
 
   const findContact = () => {
     return contactsRedux.filter(el => {

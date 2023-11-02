@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchContacts } from './contactsActions';
+import { setFilter } from './filterActions';
 
 const contactsSlice = createSlice({
   name: 'phonebook',
@@ -7,6 +8,7 @@ const contactsSlice = createSlice({
     items: [],
     isLoading: false,
     error: null,
+    filter: '',
   },
   extraReducers: builder => {
     builder
@@ -21,6 +23,9 @@ const contactsSlice = createSlice({
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(setFilter, (state, action) => {
+        state.filter = action.payload;
       });
   },
 });
